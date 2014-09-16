@@ -19,3 +19,6 @@ This repository contains **Dockerbase** of [Devbase-rvm](https://rvm.io/) for [D
 ### Usage
 
     docker run -it --rm --name dockerbase-devbase-rvm dockerbase/devbase-rvm
+
+### Information
+[Components & Versions](https://github.com/dockerbase/devbase-rvm/blob/master/COMPONENTS)
