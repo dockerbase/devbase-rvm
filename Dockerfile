@@ -1,4 +1,4 @@
-# VERSION 1.0
+# VERSION 1.1
 # DOCKER-VERSION  1.2.0
 # AUTHOR:         Richard Lee <lifuzu@gmail.com>
 # DESCRIPTION:    Devbase-rvm Image Container
@@ -42,11 +42,13 @@ RUN     echo "source ~/.rvm/scripts/rvm" >> $HOME/.bashrc
 
 # Install Ruby
 RUN     $RVM_DIR/bin/rvm install 2.1.2
-RUN     $RVM_DIR/bin/rvm use 2.1.2 --default
+RUN     $RVM_DIR/bin/rvm alias create default ruby-2.1.2
 
 RUN     echo "gem: --no-ri --no-rdoc" > $HOME/.gemrc
+
 # Install Rails
-#RUN     $RVM_DIR/bin/rvm use 2.1.2 && gem install rails
+#RUN     /bin/bash -lc "$RVM_DIR/bin/rvm use default ; gem install rails"
+RUN     /bin/bash -lc "gem install rails"
 
 # Define default command.
 CMD ["bash"]
