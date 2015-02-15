@@ -1,53 +1,30 @@
-# VERSION 1.1
+# VERSION 1.2
 # DOCKER-VERSION  1.2.0
 # AUTHOR:         Richard Lee <lifuzu@gmail.com>
 # DESCRIPTION:    Devbase-rvm Image Container
 
 FROM dockerbase/devbase
 
-MAINTAINER Richad Lee "lifuzu@gmail.com"
-
-ENV LC_ALL C
-ENV DEBIAN_FRONTEND noninteractive
-
-# Run the build scripts
-RUN     apt-get update
-
-RUN     apt-get install -y --no-install-recommends libssl-dev man
-RUN     apt-get install -y --no-install-recommends zlib1g-dev libreadline-dev \
-            libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev
-
-# Install rvm
-RUN     apt-get install -y --no-install-recommends libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-
-# Remove the installed Ruby
-RUN     apt-get remove -y ruby rbenv
-
-# Clean up system
-RUN     apt-get clean
+# Run dockerbase script
+ADD     devbase-rvm.sh /dockerbase/
+RUN     /dockerbase/devbase-rvm.sh
 
 USER    devbase
-
 # Set environment variables.
 ENV     HOME /home/devbase
-
 # Define working directory.
 WORKDIR /home/devbase
 
-# Install rvm
+# Run dockerbase script
 ENV     RVM_DIR $HOME/.rvm
-RUN     curl -L https://get.rvm.io | bash -s stable
-RUN     $RVM_DIR/scripts/rvm
-RUN     echo "source ~/.rvm/scripts/rvm" >> $HOME/.bashrc
+ADD     rvm.sh /dockerbase/
+RUN     /dockerbase/rvm.sh
 
-# Install Ruby
-RUN     $RVM_DIR/bin/rvm install 2.1.2
-RUN     $RVM_DIR/bin/rvm alias create default ruby-2.1.2
+# Run dockerbase script
+ADD     ruby.sh /dockerbase/
+RUN     /dockerbase/ruby.sh
 
-RUN     echo "gem: --no-ri --no-rdoc" > $HOME/.gemrc
+# Run dockerbase script
+ADD     rails.sh /dockerbase/
+RUN     /dockerbase/rails.sh
 
-# Install Rails
-RUN     /bin/bash -lc "gem install rails"
-
-# Define default command.
-CMD ["bash"]

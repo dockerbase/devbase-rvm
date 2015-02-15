@@ -32,6 +32,6 @@ This repository contains **Dockerbase** of [Devbase-rvm](https://rvm.io/) for [D
     PARTICULAR PURPOSE.
     
     This program built for x86_64-pc-linux-gnu
-    rvm 1.25.30 (stable) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
-    ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
-    Rails 4.1.6
+    rvm 1.26.10 (latest) by Wayne E. Seguin <wayneeseguin@gmail.com>, Michal Papis <mpapis@gmail.com> [https://rvm.io/]
+    ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux]
+    Rails 4.2.0
